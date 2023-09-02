@@ -1,11 +1,9 @@
-import os
 import content
 import instrykchia
-file = open('text.txt', 'r')
-data = file.read()
-file.close()
+import user as us
 
-if data == 'True':
+
+if us.user['instruction']:
     content.content()
 else:
     instrykchia.instrykchia()

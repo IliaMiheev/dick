@@ -1,5 +1,8 @@
 import os
 import content
+import user as us
+
+user = us.user
 
 def instrykchia():
     os.system('cls')
@@ -7,7 +10,7 @@ def instrykchia():
 '''
 Привет! 
 В этой игре ты вводишь имя и фамилию, а программа первые три буквы заменит на "Хуй".
-Можно писать имена в нижнем регистре.
+Так как первые три буквы изменит программа, можешь писать имена в нижнем регистре.
 
 Команды:
 Введи "стоп" чтобы закончить игру и увидеть результат.
@@ -15,17 +18,20 @@ def instrykchia():
 Введи "автор" чтобы узнать о создателе.
 ''')
     ansver = input('Нажми Enter если всё понял ')
+    word = f"user = {{\n    'instruction': {user['instruction']},\n    'name':  '{user['name']}',\n}}"
+    # word = word.replace("'", "\n'")
     if ansver == '':
-        file = open('text.txt', 'w')
-        file.write('True')
-        file.close()
+        user['instruction'] = True
+        with open('user.py', 'w') as file:
+            file.write(word)
         os.system('cls')
         print('Тогда начнём')
         content.content()
     else:
-        file = open('text.txt', 'w')
-        file.write('False')
-        file.close()
+        user['instruction'] = False
+        with open('user.py', 'w') as file:
+            file.write(word)
         os.system('cls')
         print('Тогда ничем не могу помочь. :-(')
+        print(user)
         print()

@@ -1,6 +1,7 @@
 import instrykchia
 import autor
 import os
+import user
 list = []
 
 def content():
@@ -59,7 +60,7 @@ def content():
     print(photo, end='')
     print(trait)
     while stop == False:
-        UserName = input('''Введи своё имя: ''')
+        UserName = input('Введи своё имя: ')
         list.append(UserName)
         if UserName == 'стоп':
             stop = True
@@ -85,11 +86,10 @@ def content():
                     first_name_xyz = word_xyz(first_name_xyz)
                     last_name_xyz = word_xyz(last_name_xyz)
                     if last_name2 == '':
-                        print(count, ')' + first_name2 + ' - ' + first_name_xyz)
+                        print(str(count) + ')', first_name2 + ' - ' + first_name_xyz)
                     else:
-                        print(count, ')', first_name2, last_name2,' - ', first_name_xyz, last_name_xyz)
-                    # print(list)
-                print(trait, end='')
+                        print(str(count) + ')', first_name2, last_name2 + ' - ' + first_name_xyz, last_name_xyz)
+                print(trait)
         if UserName == 'помощь':
             stop = True
             instrykchia.instrykchia()
