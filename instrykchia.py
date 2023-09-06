@@ -1,14 +1,15 @@
 import os
 import content
 import user as us
+from peremennie import capitalize_after_space, clear_console
 
-user = us.user
+polzovatel = us.user
 
 def instrykchia():
-    os.system('cls')
+    clear_console()
     print(
-'''
-Привет! 
+f'''
+Привет! {polzovatel['name']}
 В этой игре ты вводишь имя и фамилию, а программа первые три буквы заменит на "Хуй".
 Так как первые три буквы изменит программа, можешь писать имена в нижнем регистре.
 
@@ -18,20 +19,16 @@ def instrykchia():
 Введи "автор" чтобы узнать о создателе.
 ''')
     ansver = input('Нажми Enter если всё понял ')
-    word = f"user = {{\n    'instruction': {user['instruction']},\n    'name':  '{user['name']}',\n}}"
-    # word = word.replace("'", "\n'")
     if ansver == '':
-        user['instruction'] = True
-        with open('user.py', 'w') as file:
-            file.write(word)
-        os.system('cls')
+        polzovatel['instruction'] = True
+        if polzovatel['name'] == '':
+            polzovatel['name'] = capitalize_after_space(input('Тогда введи своё имя '))
+
+        zapis()
         print('Тогда начнём')
         content.content()
     else:
-        user['instruction'] = False
-        with open('user.py', 'w') as file:
-            file.write(word)
-        os.system('cls')
+        polzovatel['instruction'] = False
+        zapis()
         print('Тогда ничем не могу помочь. :-(')
-        print(user)
         print()

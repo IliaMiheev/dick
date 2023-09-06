@@ -1,8 +1,9 @@
 import os
+from instrykchia import clear_console
 import content
 
 def autor ():
-    os.system('cls')
+    clear_console()
     print(
 '''
 Автор гениален. И сногшибательно красив
@@ -15,5 +16,5 @@ def autor ():
 Место обучения: ГАПОУ ВО ГСК (информационные системы и программирование)
 ''')
     a = input('Нажми Enter чтобы продолжить ')
-    os.system('cls')
+    clear_console()
     content.content()

@@ -1,9 +1,9 @@
 import content
 import instrykchia
-import user as us
+import user
 
 
-if us.user['instruction']:
+if user.user['instruction']:
     content.content()
 else:
     instrykchia.instrykchia()
