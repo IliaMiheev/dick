@@ -28,11 +28,11 @@ def content():
     print(peremennie.photo, end='')
     print(peremennie.trait)
     while not stop:
-        UserName = input('Введи имя: ')
+        UserName = input('Введи имя или команду: ')
         list.append(UserName)
         if UserName == 'стоп':
             stop = True
-            arr = ['автор', 'помощь', 'стоп', '']
+            arr = ['автор', 'помощь', 'стоп', '', 'профиль']
             for el1 in arr:
                 for el2 in list:
                     if el1 == el2:
@@ -41,7 +41,7 @@ def content():
                 peremennie.clear_console()
                 print(
 f'''
-Ты не ввёл ни одного имени, так что программа прекращает свою работу. Пока {user.user["name"]}.
+Ты не ввёл ни одного имени, так что программа прекращает свою работу. Пока, {user.user["name"]}.
 Если захочешь посмеяться, то можешь смело залетать в эту программу ;).
 Так что до встречи!!!
 ''')
@@ -50,6 +50,7 @@ f'''
                 for elem in list:
                     print(peremennie.capitalize_after_space(elem) + ' - ' + word_xyz(elem, peremennie.endings))
                 print(peremennie.trait)
+        # for key, value in peremennie.comands.items():
         if UserName == 'помощь':
             stop = True
             instrykchia.instrykchia()

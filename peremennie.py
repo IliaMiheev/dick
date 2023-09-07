@@ -39,7 +39,7 @@ endings = {
 
 def capitalize_after_space(word):
     count = 0
-    elem = word.capitalize()
+    elem = " ".join(word.replace(" ", " ").split()).capitalize()
     for bykva in elem:
         count += 1
         if bykva == ' ':

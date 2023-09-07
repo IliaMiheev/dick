@@ -17,4 +17,5 @@ def autor ():
 ''')
     a = input('Нажми Enter чтобы продолжить ')
     clear_console()
+    print('Надеюсь тебе понравилась моя биография.')
     content.content()

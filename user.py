@@ -1,4 +1,4 @@
 user = {
-    'instruction': True,
-    'name': 'илья',
+    'instruction': False,
+    'name': '',
 }

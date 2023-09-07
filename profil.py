@@ -1,10 +1,19 @@
 import user
 from peremennie import capitalize_after_space, zapis
+import content
 from instrykchia import clear_console
 def profil():
     clear_console()
-    print(f'имя: {user.user["name"]}')
-    newName = input('Введи новое имя если хочешь его изменить, а если хочешь оставить как прежде, то введи "нет"')
-    if newName != 'нет':
+    print('Данные:')
+    print(f'    Имя ——> {user.user["name"]}')
+    print()
+    newName = capitalize_after_space(input('Введи новое имя если хочешь его изменить, а если хочешь оставить как прежде, то нажми Enter '))
+    if newName != '':
         user.user['name'] = newName
         zapis()
+    clear_console()
+    if newName == '':
+        print('Ты оставил себе имя - '+ user.user['name'])
+    else:
+        print('Новое имя - ' + user.user['name'])
+    content.content()
