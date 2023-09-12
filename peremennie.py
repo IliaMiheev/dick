@@ -58,7 +58,7 @@ def clear_console():
 
 def zapis():
     import user
-    word = f"user = {{\n    'instruction': {user.user['instruction']},\n    'name': '{user.user['name']}',\n}}"
+    word = f"user = {str(user.user)}"
     with open('user.py', 'w', encoding="utf-8") as file:
         file.write(word)
     clear_console()

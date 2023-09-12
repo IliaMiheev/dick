@@ -13,7 +13,7 @@ def instrykchia():
         print(f"Привет! {polzovatel['name']}.", end='')
     print(
 f'''
-В этой игре ты вводишь имя, а программа первые три буквы заменит на "Хуй".
+В этой игре ты вводишь слово, а программа первые три буквы заменит на "Хуй".
 У всех слов, что ты введёшь, первая буква будет в верхнем регистре, так что можешь забыть про Shift и погрузиться в игру.
 
 Команды:
@@ -28,7 +28,7 @@ f'''
         if polzovatel['name'] == '':
             polzovatel['name'] = capitalize_after_space(input('Тогда введи своё имя для профиля '))
         zapis()
-        print(f'Тогда, {polzovatel["name"]}, начинай вводить имена.')
+        print(f'Тогда, {polzovatel["name"]}, начинай вводить слова.')
         content.content()
     else:
         polzovatel['instruction'] = False

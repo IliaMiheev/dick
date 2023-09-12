@@ -1,4 +1,1 @@
-user = {
-    'instruction': False,
-    'name': '',
-}
+user = {'instruction': True, 'name': 'Илья Александрович', 'arr': 'Ilia'}

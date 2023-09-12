@@ -5,7 +5,9 @@ from instrykchia import clear_console
 def profil():
     clear_console()
     print('Данные:')
-    print(f'    Имя ——> {user.user["name"]}')
+    for item, value in user.user.items():
+        if item != 'instruction':
+            print(f'    {item} ——> {str(value)}')
     print()
     newName = capitalize_after_space(input('Введи новое имя если хочешь его изменить, а если хочешь оставить как прежде, то нажми Enter '))
     if newName != '':

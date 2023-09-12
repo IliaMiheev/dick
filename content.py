@@ -21,6 +21,12 @@ def word_xyz(word, arr):
         res += i + ' '
     return res
 
+#comandr = {
+ #   'Автор': autor.autor(),
+ #   'Помощь': instrykchia.instrykchia(),
+ #   'Профиль': profil.profil(),
+ #   }
+
 def content():
     stop = False
     count = 0
@@ -28,11 +34,11 @@ def content():
     print(peremennie.photo, end='')
     print(peremennie.trait)
     while not stop:
-        UserName = input('Введи имя или команду: ')
+        UserName = peremennie.capitalize_after_space(input('Введи имя или команду: '))
         list.append(UserName)
-        if UserName == 'стоп':
+        if UserName == 'Стоп':
             stop = True
-            arr = ['автор', 'помощь', 'стоп', '', 'профиль']
+            arr = ['Автор', 'Помощь', 'Стоп', '', 'Профиль']
             for el1 in arr:
                 for el2 in list:
                     if el1 == el2:
@@ -48,15 +54,14 @@ f'''
             else:
                 print(peremennie.trait)
                 for elem in list:
-                    print(peremennie.capitalize_after_space(elem) + ' - ' + word_xyz(elem, peremennie.endings))
+                    print(peremennie.capitalize_after_space(elem) + ' ——> ' + word_xyz(elem, peremennie.endings))
                 print(peremennie.trait)
-        # for key, value in peremennie.comands.items():
-        if UserName == 'помощь':
+        if UserName == 'Помощь':
             stop = True
             instrykchia.instrykchia()
-        if UserName == 'автор':
+        if UserName == 'Автор':
             stop = True
             autor.autor()
-        if UserName == 'профиль':
+        if UserName == 'Профиль':
             stop = True
             profil.profil()
