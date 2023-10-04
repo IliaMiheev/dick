@@ -1,10 +1,23 @@
 import instrykchia
 import autor
 import profil
+import zapisList
 import user
 import peremennie
+from listPlay import listPlay
+import lists
+def printList():
+    if peremennie.stroka(list) == '':
+        print('\033[91mСписок пуст\033[0m')
+    else:
+        print(f'''
+Введённые слова: "{peremennie.stroka(list)}"
+    ''')
 list = []
-
+logo = f'''
+Ты не ввёл ни одного слова, так что программа прекращает свою работу. Пока, {user.user["Имя"]}.
+Если захочешь посмеяться, то можешь смело залетать в эту программу ;).
+Так что \033[91mдо встречи!!!\033[0m  '''
 def word_xyz(word, arr):
     elem = word.split()
     res = ''
@@ -21,47 +34,75 @@ def word_xyz(word, arr):
         res += i + ' '
     return res
 
-#comandr = {
- #   'Автор': autor.autor(),
- #   'Помощь': instrykchia.instrykchia(),
- #   'Профиль': profil.profil(),
- #   }
-
-def content():
+def content(word = ''):
+    peremennie.clear_console()
     stop = False
-    count = 0
+    if word != '':
+        print(word)
     print(peremennie.trait, end='')
     print(peremennie.photo, end='')
     print(peremennie.trait)
     while not stop:
-        UserName = peremennie.capitalize_after_space(input('Введи имя или команду: '))
+        UserName = input('Введи имя или команду: ')
         list.append(UserName)
-        if UserName == 'Стоп':
+
+        if UserName == '':
+            list.pop()
             stop = True
-            arr = ['Автор', 'Помощь', 'Стоп', '', 'Профиль']
-            for el1 in arr:
-                for el2 in list:
-                    if el1 == el2:
-                        list.remove(el2)
             if len(list) == 0:
                 peremennie.clear_console()
-                print(
-f'''
-Ты не ввёл ни одного имени, так что программа прекращает свою работу. Пока, {user.user["name"]}.
-Если захочешь посмеяться, то можешь смело залетать в эту программу ;).
-Так что до встречи!!!
-''')
+                print(logo)
             else:
                 print(peremennie.trait)
                 for elem in list:
-                    print(peremennie.capitalize_after_space(elem) + ' ——> ' + word_xyz(elem, peremennie.endings))
+                    print(peremennie.capitalize_after_space(elem) + ' ——> ' + peremennie.capitalize_after_space(word_xyz(elem, peremennie.endings)))
+                    print()
                 print(peremennie.trait)
-        if UserName == 'Помощь':
+        elif  UserName == 'помощь':
+            list.pop()
             stop = True
             instrykchia.instrykchia()
-        if UserName == 'Автор':
+        elif  UserName == 'автор':
+            list.pop()
             stop = True
             autor.autor()
-        if UserName == 'Профиль':
+        elif  UserName == 'профиль':
+            list.pop()
             stop = True
-            profil.profil()
+            profil.profil('\033[91mВот твой профиль.\033[0m')
+        elif  UserName == 'запись':
+            list.pop()
+            stop = True
+            zapisList.zapisList()
+        elif  UserName == 'удаление списков':
+            list.pop()
+            stop = True
+            lists.lists()
+        elif  UserName == 'использовать списки':
+            list.pop()
+            peremennie.clear_console()
+            print(peremennie.trait, end='')
+            print(peremennie.photo, end='')
+            print(peremennie.trait)
+            count = 0
+            res = True
+            ansver = []
+            print(f"Твои списки: \033[91m{peremennie.stroka(user.user['arr'])}\033[0m")
+            nameList = input('Веди название списка который хочешь использовать: ')
+            while res:
+                if listPlay(nameList) != False:
+                    ansver = listPlay(nameList)
+                    for elem in ansver:
+                        if count != 1:
+                            list.append(elem)
+                        count +=1
+                    print('Список добавлен.')
+                    printList()
+                    break
+                else:
+                    print('Такого списка нет.')
+                    printList()
+                    break
+        elif  UserName == 'посмотреть список':
+            list.pop()
+            printList()
