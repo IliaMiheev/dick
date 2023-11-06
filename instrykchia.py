@@ -1,22 +1,19 @@
 import content
-import user as us
+from user import user as us
 from peremennie import capitalize_after_space, clear_console, zapis
-
-polzovatel = us.user
 
 def instrykchia():
     clear_console()
     logo = ''
-
-    if polzovatel['Имя'] == '':
+    if us['Имя'] == '':
         logo = 'Здравствуй!'
     else:
-        logo = f"{polzovatel['Имя']} здравствуй."
+        logo = f"Здравствуй {us['Имя']}."
     print(f'\033[92m{logo}\033[0m', end ='  ')
     print(
-f'''
-В этой игре ты вводишь слово, а программа первые три буквы заменит на "Хуй".
-В любом режиме, у всех слов которые ты введёшь, первая буква будет в верхнем регистре(кроме режима записи), так что можешь забыть про Shift и погрузиться в игру.
+'''
+В этой игре ты вводишь слово, а программа первые три буквы заменит на хуй )))))))).
+В любом режиме, кроме записи, первая буква твоих слов будет в верхнем регистре.
 
 Команды в режиме ввода слов:
     Нажми Enter, в режиме ввода слов, чтобы закончить игру и увидеть результат.
@@ -26,17 +23,31 @@ f'''
     Введи \033[92m"запись"\033[0m чтобы программа запомнила слова которые ты введёшь и тебе не пришлось их вписывать по нескольку раз.
     Введи \033[92m"удаление списков"\033[0m чтобы удалить все списки или или нет.
     Введи \033[92m"использовать списки"\033[0m чтобы слова из твоих списков ахуячить))))))
-    Введи \033[92m"посмотреть список"\033[0m чтобы увидеть введённые тобой слова
-    ''')
-    ansver = input('Нажми Enter если всё понял, если не понял, то введи что-нибудь ')
-    if ansver == '':
-        polzovatel['instruction'] = True
-        if polzovatel['Имя'] == '':
-            polzovatel['Имя'] = capitalize_after_space(input('Тогда введи своё имя для профиля: '))
-        zapis()
-        content.content(f'\033[93mТогда, {polzovatel["Имя"]}, начинай вводить слова.\033[0m')
+    Введи \033[92m"посмотреть слова"\033[0m чтобы увидеть введённые тобой слова.
+''')
+    ansver = input('Нажми Enter если всё понял, иначе введи что-нибудь ')
+    if ansver.replace(' ','') == '':
+        if us['instruction'] == False:
+            us['instruction'] = True
+        if us['Имя'] == '':
+            count = 0
+            while 1:
+                ans = input('Тогда введи своё имя для профиля: ')
+                if count == 2:
+                    clear_console()
+                    print() 
+                    print('\033[91mТы сломал программу. Игра окончена.\033[0m')
+                    break
+                elif ans.replace(" ", "") != '' and count != 2:
+                    us['Имя'] = capitalize_after_space(ans)
+                    content.content(f'Тогда, {us["Имя"]}, начинай вводить слова.')
+                    break
+                else:
+                    count += 1
+        else:
+            content.content(f'Тогда, {us["Имя"]}, начинай вводить слова.')
+        zapis(False)
     else:
-        polzovatel['instruction'] = False
+        us['instruction'] = False
         zapis()
         print('Тогда ничем не могу помочь. \033[91m:-(\033[0m')
-        print()

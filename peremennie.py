@@ -1,6 +1,6 @@
 trait = '\033[92m——————————————————————————————————————————————————————————————————————————————————————————————————\033[0m'
 
-photo = '''
+photo = '''\033[92m——————————————————————————————————————————————————————————————————————————————————————————————————
 ####..##........####.....###.............##.....##..####..##.....##..########..########..##.....##
 .##...##.........##.....##.##............###...###...##...##.....##..##........##........##.....##
 .##...##.........##....##...##...........####.####...##...##.....##..##........##........##.....##
@@ -8,7 +8,7 @@ photo = '''
 .##...##.........##...#########..........##.....##...##...##.....##..##........##.........##...##.
 .##...##.........##...##.....##..........##.....##...##...##.....##..##........##..........##.##..
 ####..########..####..##.....##..........##.....##..####..##.....##..########..########.....###...
-'''
+——————————————————————————————————————————————————————————————————————————————————————————————————\033[0m'''
 
 endings = {
     'ы': {
@@ -52,9 +52,19 @@ a = '''
 ┌──(kali㉿kali)-[~]
 └─
 '''
+
+def printList(mess, l):
+    if stroka(l) == '':
+        print('\033[91mСписок пуст\033[0m')
+    else:
+        print(f'''
+{mess} \033[91m{stroka(l)}\033[0m
+    ''')
+
 def capitalize_after_space(word):
     count = 0
-    elem = " ".join(word.replace(" ", " ").split()).capitalize()
+    word= word[0].upper() + word[1:]
+    elem = " ".join(word.replace(" ", " ").split())
     for bykva in elem:
         count += 1
         if bykva == ' ':
@@ -100,6 +110,7 @@ def stroka(spisok):
         if string != '':
             string = string[:-2] + '.'
         return string
+
 def printUserKeys():
     from user import user
     list = []
@@ -107,4 +118,18 @@ def printUserKeys():
         for key in element:
             list.append(key)
     return list
-    
+
+def listPlay(nameList):
+    from user import user
+    list = []
+    count = 0
+    userList = printUserKeys()
+    if nameList in userList:
+        for elements in userList:
+            if elements == nameList:
+                for key, value in user['arr'][count].items():
+                    list = value
+            count += 1
+        return list
+    else:
+        return False

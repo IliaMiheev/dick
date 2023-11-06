@@ -2,22 +2,18 @@ import instrykchia
 import autor
 import profil
 import zapisList
-import user
+from user import user
 import peremennie
-from listPlay import listPlay
 import lists
-def printList():
-    if peremennie.stroka(list) == '':
-        print('\033[91mСписок пуст\033[0m')
-    else:
-        print(f'''
-Введённые слова: "{peremennie.stroka(list)}"
-    ''')
+import utilizeList
+import reboot
+
 list = []
 logo = f'''
-Ты не ввёл ни одного слова, так что программа прекращает свою работу. Пока, {user.user["Имя"]}.
+Ты не ввёл ни одного слова, так что программа прекращает свою работу. Пока, {user["Имя"]}.
 Если захочешь посмеяться, то можешь смело залетать в эту программу ;).
-Так что \033[91mдо встречи!!!\033[0m  '''
+Так что \033[92mдо встречи!!!\033[0m  '''
+
 def word_xyz(word, arr):
     elem = word.split()
     res = ''
@@ -34,19 +30,19 @@ def word_xyz(word, arr):
         res += i + ' '
     return res
 
-def content(word = ''):
+def content(word = '', bool = False, dopword = []):
     peremennie.clear_console()
-    stop = False
+    stop = bool
+    for elem in dopword:
+        list.append(elem)
     if word != '':
-        print(word)
-    print(peremennie.trait, end='')
-    print(peremennie.photo, end='')
-    print(peremennie.trait)
+        print(f'\033[92m{word}\033[0m')
+        print()
+    print(peremennie.photo)
     while not stop:
         UserName = input('Введи имя или команду: ')
         list.append(UserName)
-
-        if UserName == '':
+        if UserName.lower().replace(" ", "") == '':
             list.pop()
             stop = True
             if len(list) == 0:
@@ -58,51 +54,47 @@ def content(word = ''):
                     print(peremennie.capitalize_after_space(elem) + ' ——> ' + peremennie.capitalize_after_space(word_xyz(elem, peremennie.endings)))
                     print()
                 print(peremennie.trait)
-        elif  UserName == 'помощь':
+        elif  UserName.lower() == 'помощь':
             list.pop()
             stop = True
             instrykchia.instrykchia()
-        elif  UserName == 'автор':
+        elif  UserName.lower() == 'автор':
             list.pop()
             stop = True
             autor.autor()
-        elif  UserName == 'профиль':
+        elif  UserName.lower() == 'профиль':
             list.pop()
             stop = True
-            profil.profil('\033[91mВот твой профиль.\033[0m')
-        elif  UserName == 'запись':
+            profil.profil('\033[93mВот твой профиль.\033[0m')
+        elif  UserName.lower() == 'запись':
             list.pop()
             stop = True
             zapisList.zapisList()
-        elif  UserName == 'удаление списков':
+        elif  UserName.lower() == 'удаление списков' or UserName.lower() == 'дел':
             list.pop()
             stop = True
             lists.lists()
-        elif  UserName == 'использовать списки':
+        elif  UserName.lower() == 'использовать списки' or UserName.lower() == 'ют':
             list.pop()
-            peremennie.clear_console()
-            print(peremennie.trait, end='')
-            print(peremennie.photo, end='')
-            print(peremennie.trait)
-            count = 0
-            res = True
-            ansver = []
-            print(f"Твои списки: \033[91m{peremennie.stroka(user.user['arr'])}\033[0m")
-            nameList = input('Веди название списка который хочешь использовать: ')
-            while res:
-                if listPlay(nameList) != False:
-                    ansver = listPlay(nameList)
-                    for elem in ansver:
-                        if count != 1:
-                            list.append(elem)
-                        count +=1
-                    print('Список добавлен.')
-                    printList()
-                    break
-                else:
-                    print('Такого списка нет.')
-                    printList()
-                    break
-        elif  UserName == 'посмотреть список':
+            stop = True
+            utilizeList.utilizeList()
+        elif  UserName.lower() == 'посмотреть список' or UserName.lower() == 'во':
             list.pop()
-            printList()
+            stop = True
+            text = peremennie.stroka(list)
+            if text == '':
+                reboot.reboot('Список пуст.')
+            else:
+                reboot.reboot(f'Твои слова: {text}')
+            
+        elif  UserName.lower() == 'dell':
+            list.pop()
+            stop = True
+            user['instruction'] = False
+            user['arr'] = []
+            user["Имя"] = ''
+            peremennie.zapis()
+            print('''
+У тебя из профиля были удалены имя, списки и системные переменные.
+Когда ты заново войдёшь в игру, то тебе будет предложено заново зарегистрироваться.
+\033[92mДо встречи.\033[0m''')
